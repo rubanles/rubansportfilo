@@ -17,21 +17,21 @@ const Contact: React.FC = () => {
     const data = new FormData(form);
 
     try {
-      const response = await fetch("https://formspree.io/f/mqezgvja", {
-        method: "POST",
+      const res = await fetch('https://formspree.io/f/mqezgvja', {
+        method: 'POST',
         body: data,
         headers: {
-          Accept: "application/json",
+          Accept: 'application/json',
         },
       });
 
-      if (response.ok) {
+      if (res.ok) {
         setSuccess(true);
         form.reset();
       } else {
         setError(true);
       }
-    } catch (err) {
+    } catch {
       setError(true);
     } finally {
       setLoading(false);
@@ -105,13 +105,35 @@ const Contact: React.FC = () => {
             <form onSubmit={handleSubmit} className="space-y-6">
 
               <div className="grid md:grid-cols-2 gap-6">
-                <input name="name" placeholder="Full Name" required className="input" />
-                <input name="email" type="email" placeholder="Email Address" required className="input" />
+                <input
+                  type="text"
+                  name="name"
+                  placeholder="Full Name"
+                  required
+                  className="w-full px-6 py-4 rounded-xl bg-white dark:bg-white/5 border border-slate-200 dark:border-white/10 focus:border-brand outline-none"
+                />
+
+                <input
+                  type="email"
+                  name="email"
+                  placeholder="Email Address"
+                  required
+                  className="w-full px-6 py-4 rounded-xl bg-white dark:bg-white/5 border border-slate-200 dark:border-white/10 focus:border-brand outline-none"
+                />
               </div>
 
-              <input name="phone" placeholder="+91 XXXXX XXXXX" className="input" />
+              <input
+                type="tel"
+                name="phone"
+                placeholder="+91 XXXXX XXXXX"
+                className="w-full px-6 py-4 rounded-xl bg-white dark:bg-white/5 border border-slate-200 dark:border-white/10 focus:border-brand outline-none"
+              />
 
-              <select name="project" required className="input">
+              <select
+                name="project"
+                required
+                className="w-full px-6 py-4 rounded-xl bg-white dark:bg-white/5 border border-slate-200 dark:border-white/10 focus:border-brand outline-none"
+              >
                 <option>Website Development</option>
                 <option>Web Application</option>
                 <option>Mobile App</option>
@@ -124,7 +146,7 @@ const Contact: React.FC = () => {
                 name="message"
                 placeholder="Tell me about your project..."
                 required
-                className="input resize-none"
+                className="w-full px-6 py-4 rounded-xl bg-white dark:bg-white/5 border border-slate-200 dark:border-white/10 focus:border-brand outline-none resize-none"
               />
 
               <button
@@ -133,7 +155,7 @@ const Contact: React.FC = () => {
                 className="w-full py-5 bg-brand text-white rounded-xl font-bold flex items-center justify-center gap-3 shadow-xl hover:opacity-90 transition-all"
               >
                 <Send size={18} />
-                {loading ? "Sending..." : "Send Message"}
+                {loading ? 'Sending…' : 'Send Message'}
               </button>
 
               {success && (
